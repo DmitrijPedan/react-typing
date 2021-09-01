@@ -5,6 +5,7 @@ import {IUser, ITodo} from "./types/types";
 import List from "./components/List";
 import UserItem from "./components/UserItem";
 import TodoItem from "./components/TodoItem";
+import EventsExample from "./components/EventsExample";
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
 
   return (
     <div className="App">
+			<EventsExample></EventsExample>
       <h1>Works</h1>
 			<Card width={'250px'} height={'250px'} backgroundColor={'red'} variant={CardVariant.outlined} cardAction={(num) => console.log('action', num)}>
 				<p>Content</p>
