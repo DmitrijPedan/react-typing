@@ -13,7 +13,9 @@ interface CardProps {
 	cardAction?: (num: number) => void;
 }
 
-const Card: React.FC<CardProps> = ({variant, width, height, backgroundColor, children, cardAction}) => {
+const Card: React.FC<CardProps> = (props) => {
+
+	const {variant, width, height, backgroundColor, children, cardAction} = props;
 
 	const [state, setState] = useState(0)
 
