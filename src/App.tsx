@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
 import Card, {CardVariant} from "./components/Card";
-import UserList from "./components/UserList";
-import {IUser} from "./types/types";
+import {IUser, ITodo} from "./types/types";
 import List from "./components/List";
 import UserItem from "./components/UserItem";
+import TodoItem from "./components/TodoItem";
 
 function App() {
 
-	const [users, setUsers] = useState<IUser[]>([])
+	const [users, setUsers] = useState<IUser[]>([]);
+	const [todos, setTodos] = useState<ITodo[]>([]);
 
 	const fetchUsers = () => {
 		fetch('https://jsonplaceholder.typicode.com/users?_limit=3')
@@ -16,8 +17,15 @@ function App() {
 			.then((json: IUser[]) => setUsers(json))
 	}
 
+	const fetchTodos = () => {
+		fetch('https://jsonplaceholder.typicode.com/todos?_limit=3')
+			.then(response => response.json())
+			.then((json: ITodo[]) => setTodos(json))
+	}
+
 	useEffect(() => {
-		fetchUsers()
+		fetchUsers();
+		fetchTodos();
 	}, [])
 
   return (
@@ -27,6 +35,7 @@ function App() {
 				<p>Content</p>
 			</Card>
 			<List title={'Users:'} items={users} renderItem={(user: IUser) => <UserItem user={user} key={user.id}/>} />
+			<List title={'Todos:'} items={todos} renderItem={(todo: ITodo) => <TodoItem todo={todo} key={todo.id}/>} />
     </div>
   );
 }
